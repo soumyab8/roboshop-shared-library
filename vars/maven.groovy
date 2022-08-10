@@ -6,12 +6,18 @@ def lintChecks() {
     '''
 }
 
+def sonarCheck(){
+    sh '''
+       sonar-scanner -Dsonar.host.url=http://172.31.12.77:9000 -Dsonar.sources=. -Dsonar.projectKey=shipping -Dsonar.login=${SONAR_USR} -Dsonar.password=${SONAR_PSW} -Dsonar.java.binaries=target/classes/
+       '''
+}
+
 def call() {     // call is the default which will be called
 pipeline {
     agent any 
-    // environment { 
-    //     SONAR = credentials('sonar')
-    // }
+    environment { 
+        SONAR = credentials('sonar')
+    }
     stages {
         // This should run for every commit on feature branch
         stage('Lint checks') {
@@ -22,13 +28,7 @@ pipeline {
                 }
             }
 
-        // stage('Sonar Code Quality Check') {
-        //     steps {
-        //         script {
-        //              common.javaSonarCheck()
-        //             }
-        //         }
-        //     }
+
         // stage('Build') {
         //     steps {
         //         sh "echo Doing build"
