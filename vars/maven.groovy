@@ -31,7 +31,7 @@ pipeline {
         stage('SONAR checks') {
             steps {
                 script {
-                    sh mvn clean compile
+                    mvn clean compile
                     sonarCheck()
                     }
                 }
