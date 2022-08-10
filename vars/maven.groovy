@@ -13,7 +13,7 @@ def sonarCheck(){
     '''
 }
 
-def call() {     // call is the default which will be called
+def call() {     //call is the default which will be called
 pipeline {
     agent any 
     environment { 
