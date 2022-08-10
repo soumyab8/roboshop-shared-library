@@ -28,6 +28,15 @@ pipeline {
                 }
             }
 
+        stage('SONAR checks') {
+            steps {
+                script {
+                    sonarCheck()
+                    }
+                }
+            }
+    
+
 
         // stage('Build') {
         //     steps {
