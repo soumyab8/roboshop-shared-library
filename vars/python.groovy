@@ -9,9 +9,9 @@ def lintChecks() {
 def call() {     // call is the default which will be called
 pipeline {
     agent any 
-    // environment { 
-    //     SONAR = credentials('sonar')
-    // }
+    environment { 
+        SONAR = credentials('sonar')
+    }
     stages {
         // This should run for every commit on feature branch
         stage('Lint checks') {
@@ -21,18 +21,18 @@ pipeline {
                     }
                 }
             }
-        // stage('Sonar Code Quality Check') {
-        //     steps {
-        //         script {
-        //              common.sonarCheck()
-        //             }
-        //         }
-        //     }
-        // stage('Build') {
-        //     steps {
-        //         sh "echo Doing build"
-        //        }
-        //     }
+        stage('Sonar Code Quality Check') {
+            steps {
+                script {
+                     common.sonarCheck()
+                    }
+                }
+            }
+        stage('Build') {
+            steps {
+                sh "echo Doing build"
+               }
+            }
         } // end of the stages
     }  // end of the pipeline
 }  // end of function call 
