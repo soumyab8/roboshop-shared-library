@@ -38,12 +38,11 @@ pipeline {
             }
     
 
-
-        // stage('Build') {
-        //     steps {
-        //         sh "echo Doing build"
-        //        }
-        //     }
+        stage('Build') {
+            steps {
+                sh "echo Doing build"
+               }
+            }
         } // end of the stages
     }  // end of the pipeline
 }  // end of function call 
