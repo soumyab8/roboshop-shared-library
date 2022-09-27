@@ -74,15 +74,16 @@ def testCases() {
 // Parallel Stage reference # Ex:23
 // https://stackoverflow.com/questions/46834998/scripted-jenkinsfile-parallel-stage
 
-def artifacts() { 
+def artifacts() 
+         // { 
 
-        stage('Checking the release') {               
-                script {
+        // stage('Checking the release') {               
+         //       script {
                    // env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl http://172.31.8.134:8081/service/rest/repository/browse/${COMPONENT}/ |grep ${COMPONENT}-${TAG_NAME}.zip || true")
                     // print UPLOAD_STATUS
-                    sh "echo checking release completed"
-            }
-        }
+                  //  sh "echo checking release completed"
+           // }
+       // }
     if(env.UPLOAD_STATUS == "") {   // Start of if
         stage('Prepare Artifacts') {
            if (env.APP_TYPE == "nodejs") {
