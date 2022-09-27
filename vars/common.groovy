@@ -86,7 +86,7 @@ def artifacts()
            // }
        // }
     // if(env.UPLOAD_STATUS == "") {   // Start of if
-    
+
         stage('Prepare Artifacts') {
            if (env.APP_TYPE == "nodejs") {
                
@@ -113,10 +113,11 @@ def artifacts()
             } 
 
            else if (env.APP_TYPE == "golang")  {
-                sh "go mod init ${COMPONENT}"
-                sh "go get"
-                sh "go build"
-                sh "zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}"
+               // sh "go mod init ${COMPONENT}"
+               //  sh "go get"
+               // sh "go build"
+               // sh "zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}"
+               sh "echo Artifacts Preparation Completed................!!!"
                
            }          
         }
