@@ -28,6 +28,29 @@ pipeline {
                     }
                 }
             }
+
+        stage('Test cases') {
+            parallel{
+                stage('Unit testing'){
+                    steps{
+                    sh "echo Unit testing completed"
+                    }
+                }
+
+                  stage('Integration testing'){
+                    steps{
+                    sh "echo Integration testing completed"
+                    }
+                }
+
+                 stage('Functional testing'){
+                    steps{
+                    sh "echo Functional testing completed"
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 sh "echo Doing build"
