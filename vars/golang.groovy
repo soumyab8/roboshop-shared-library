@@ -1,61 +1,51 @@
-def lintChecks() {
-  sh '''
-    echo installing jslint
-    npm install jslint
-    ~/node_modules/jslint/bin/jslint.js server.js || true
-    echo lint checks completed for ${COMPONENT}
-    '''
+def call() {
+    node {
+        env.APP_TYPE = "golang"
+        common.lintChecks()
+        common.sonarCheck()
+        common.testCases()
+        if(env.TAG_NAME != null) {
+        common.artifacts()
+        }
+    }
 }
 
-def call() {     // call is the default which will be called
-pipeline {
-    agent any 
-    environment { 
-        SONAR = credentials('sonar')
-    }
-    stages {
-        // This should run for every commit on feature branch
-        stage('Lint checks') {
-            steps {
-                script {
-                     lintChecks()
-                    }
-                }
-            }
-        stage('Sonar Code Quality Check') {
-            steps {
-                script {
-                     common.sonarCheck()
-                    }
-                }
-            }
+// def call() {     // call is the default which will be called
+// pipeline {
+//     agent any 
+//     environment { 
+//         SONAR = credentials('sonar')
+//     }
+//     stages {
+//         // This should run for every commit on feature branch
+            
+//         stage('Test Cases') {
+//             parallel {
+//                 stage('Unit Testing') {
+//                     steps {
+//                         // mvn test or npm test
+//                         sh "echo Unit Testing Completed"
+//                     }
+//                 }
+//                 stage('Integration Testing') {
+//                     steps {
+//                         // mvn verify or npm verify
+//                         sh "echo Integration Testing Completed"
+//                     }
+//                 }
+//                 stage('Function Testing') {
+//                     steps {
+//                         sh "echo Functional Testing Completed"
+//                     }
+//                 }
+//             }
+//         }
 
-        stage('Test cases') {
-            parallel{
-                stage('Unit testing'){
-                    steps{
-                    sh "echo Unit testing completed"
-                    }
-                }
-
-                  stage('Integration testing'){
-                    steps{
-                    sh "echo Integration testing completed"
-                    }
-                }
-
-                 stage('Functional testing'){
-                    steps{
-                    sh "echo Functional testing completed"
-                    }
-                }
-            }
-        }
-        stage('Build') {
-            steps {
-                sh "echo Doing build"
-               }
-            }
-        } // end of the stages
-    }  // end of the pipeline
-}  // end of function call 
+//         stage('Build') {
+//             steps {
+//                 sh "echo Doing build"
+//                }
+//             }
+//         } // end of the stages
+//     }  // end of the pipeline
+// }  // end of function call 
