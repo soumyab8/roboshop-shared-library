@@ -85,7 +85,8 @@ def artifacts()
                   //  sh "echo checking release completed"
            // }
        // }
-    if(env.UPLOAD_STATUS == "") {   // Start of if
+    // if(env.UPLOAD_STATUS == "") {   // Start of if
+    
         stage('Prepare Artifacts') {
            if (env.APP_TYPE == "nodejs") {
                
@@ -129,7 +130,7 @@ def artifacts()
 
                }
             }
-}
+// }
         // end of if
 
 
