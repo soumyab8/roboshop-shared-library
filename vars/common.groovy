@@ -74,7 +74,8 @@ def testCases() {
 // Parallel Stage reference # Ex:23
 // https://stackoverflow.com/questions/46834998/scripted-jenkinsfile-parallel-stage
 
-def artifacts() 
+def artifacts()
+{
          // { 
 
         // stage('Checking the release') {               
@@ -128,6 +129,7 @@ def artifacts()
 
                }
             }
+}
         // end of if
 
 
